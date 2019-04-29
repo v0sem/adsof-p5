@@ -15,9 +15,9 @@ public class IMatrixEle<T> implements IMatrixElement<T>{
 	private int j;
 	
 	/**
-	 * Type of element
+	 * Element
 	 */
-	T t;
+	private T element;
 	
 	
 	/**
@@ -27,11 +27,11 @@ public class IMatrixEle<T> implements IMatrixElement<T>{
 	 * @param j Position of the element in the columns
 	 * @param type Type of element
 	 */
-	public IMatrixEle(int i, int j, T type) {
+	public IMatrixEle(int i, int j, T element) {
 		
 		this.i = i;
 		this.j = j;
-		this.t = type;
+		this.element = element;
 		
 	}
 	
@@ -49,26 +49,26 @@ public class IMatrixEle<T> implements IMatrixElement<T>{
 
 	@Override
 	public T getElement() {
-		// TODO Auto-generated method stub
-		return t;
+		return element;
 	}
 
 	@Override
 	public void setElement(T element) {
-		this.t = element;
+		this.element = element;
 	}
 	
 	@Override
 	public String toString() {
-		return "( Fila: " + this.i + ", Columna: " + this.j + ",Elemento: " + this.t;
+		return "( Fila: " + this.i + ", Columna: " + this.j + ", Elemento: " + this.element;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(IMatrixEle<T> obj) {
 		
-		if(this==obj) {
+		if(obj == null)
+			return false;
+		
+		if(this.i == obj.i && this.j == obj.j && this.element == obj.element) 
 			return true;
-		}
 		
 		return false;
 	}

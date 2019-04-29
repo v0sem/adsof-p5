@@ -1,7 +1,7 @@
 package es.uam.eps.ads.p5.JUnits;
 
 import static org.junit.Assert.*;
-
+import static org.hamcrest.CoreMatchers.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class IMatrixTest {
 	public void testStringMatriz() throws IllegalPositionException{
 		
 		String temp = "Cadena de ejemplo";
-		IMatrixDicc<String> matriz = new IMatrixDicc<String>(4, 8, temp);
+		IMatrixDicc<String> matriz = new IMatrixDicc<String>(4, 8);
 		
 		//Testeamos getCols()
 		assertEquals(8, matriz.getCols());
@@ -53,7 +53,7 @@ public class IMatrixTest {
 		List<IMatrixElement<String>> allEles = new ArrayList<IMatrixElement<String>>();
 		allEles.add(elemento);
 		allEles.add(elemento2);
-		//assertEquals(allEles, matriz.asList());
+		assertThat(allEles, is(matriz.asList()));
 
 		
 	}
@@ -62,7 +62,7 @@ public class IMatrixTest {
 	public void testIntMatriz() throws IllegalPositionException{
 		
 		Integer temp = 3;
-		IMatrixDicc<Integer> matriz = new IMatrixDicc<Integer>(6, 7, temp);
+		IMatrixDicc<Integer> matriz = new IMatrixDicc<Integer>(6, 7);
 		
 		//Testeamos getCols()
 		assertEquals(7, matriz.getCols());
@@ -123,6 +123,8 @@ public class IMatrixTest {
 		assertTrue(elemento.equals(elemento));
 		
 	}
+	
+	
 
 
 

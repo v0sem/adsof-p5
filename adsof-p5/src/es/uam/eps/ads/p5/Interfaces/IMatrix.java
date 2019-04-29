@@ -1,5 +1,6 @@
 package es.uam.eps.ads.p5.Interfaces;
 
+import java.util.Comparator;
 import java.util.List;
 
 import es.uam.eps.ads.p5.Exception.IllegalPositionException;
@@ -12,4 +13,6 @@ public interface IMatrix<T> {
 	IMatrixElement<T> getElementAt(int i, int j) throws IllegalPositionException;
 	List<IMatrixElement<T>> getNeighboursAt(int i, int j) throws IllegalPositionException;
 	List<IMatrixElement<T>> asList();
+	List
+	<IMatrixElement<T>> asListSortedBy(Comparator<IMatrixElement<T>> c);
 }

@@ -1,6 +1,7 @@
 package es.uam.eps.ads.p5.Classes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +29,6 @@ public class IMatrixDicc<T> implements IMatrix<T> {
 	 */
 	int cols;
 	
-	/**
-	 * Type of element to store
-	 */
-	T t;
-	
 	
 	/**
 	 * Constructor for tables based in HashMaps
@@ -41,11 +37,9 @@ public class IMatrixDicc<T> implements IMatrix<T> {
 	 * @param columns maximum number of elements in one column
 	 * @param type of element to store in the table
 	 */
-	public IMatrixDicc(int rows, int columns, T type) {
-		// TODO Auto-generated constructor stub
+	public IMatrixDicc(int rows, int columns) {
 		this.rows = rows;
 		this.cols = columns;
-		this.t = type;
 		
 		this.table = new HashMap<Integer, IMatrixElement<T>>();
 	}
@@ -67,8 +61,6 @@ public class IMatrixDicc<T> implements IMatrix<T> {
 
 	@Override
 	public void addElement(IMatrixElement<T> element) throws IllegalPositionException {
-		if(!element.getElement().equals(t))
-			return;
 		if(!this.isLegalPosition(element.getI(), element.getJ()))
 			throw new IllegalPositionException();
 		
@@ -122,6 +114,17 @@ public class IMatrixDicc<T> implements IMatrix<T> {
 		return null;
 	}
 	
+	public boolean equals(IMatrixDicc<T> matrix) {
+		
+		if(matrix == null)
+			return false;
+		
+		List<IMatrixElement<T>> listA = this.asList();
+		List<IMatrixElement<T>> listB = this.asList();
+		
+		return listA.equals(listB);
+	}
+	
 	/**
 	 * Calculates the key in the map given coordinates
 	 * 
@@ -132,6 +135,27 @@ public class IMatrixDicc<T> implements IMatrix<T> {
 	 */
 	private Integer calculateKey(int i, int j){
 		return getRows() * i + j; 
+	}
+
+	@Override
+	public List<IMatrixElement<T>> asListSortedBy(Comparator<IMatrixElement<T>> c) {
+		if(c == null)
+			return null;
+		
+		List<IMatrixElement<T>> list = this.asList(); 
+		for (int i = 0; i < list.size() - 1; i++)
+        {
+            int index = i;
+            for (int j = i + 1; j < list.size(); j++)
+                if (c.compare(list.get(j), list.get(index)) == 1) 
+                    index = j;
+      
+            IMatrixElement<T> smaller = list.get(index);  
+            list.add(index, list.get(i));
+            list.add(i, smaller);
+        }
+		
+		return list;
 	}
 
 }
