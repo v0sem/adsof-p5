@@ -4,7 +4,7 @@ import es.uam.eps.ads.p5.Interfaces.IBasicAgent;
 import es.uam.eps.ads.p5.Classes.BasicAgent;
 import es.uam.eps.ads.p5.Classes.BasicSimulator;
 
-public class MainSimulador {
+public class MainBasicAgentSimulador {
 	
 	public static void main(String[] args) {
 		BasicSimulator s = new BasicSimulator(10,10);

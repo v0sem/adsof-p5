@@ -15,11 +15,11 @@ public class BasicSimulator {
 	
 	public void create(IBasicAgent agent, int agentNum, int x, int y){
 		
-		IBasicAgent[] agents = new IBasicAgent [agentNum];
+		IBasicAgent[] agents = new BasicAgent [agentNum];
 		
 		agents[0] = agent;
 		
-		agents[0].setPos(new Cell(x, y));
+		((BasicAgent) agents[0]).setPos(new Cell(x, y));
 		
 		for(int i = 1; i < agentNum; i++) {
 			agents[i] = agent.copy();
@@ -35,28 +35,32 @@ public class BasicSimulator {
 	}
 	
 	public void run(int times) {
+		for(int t = 0; t < times; t++) {
+			printMatrix(t);
+		}
+	}
+	
+	private void printMatrix(int t) {
 		IMatrixElement<Integer> value = null;
 		
-		for(int t = 0; t < times; t++) {
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("Time = " + t);
-			
-			for(int i = 0; i < table.getRows(); i++) {
-				for(int j = 0; j < table.getCols(); j++) {
-					try {
-						value = table.getElementAt(i, j);
-					} catch (IllegalPositionException e) {
-						e.printStackTrace();
-					}
-					
-					if(value == null) 
-						System.out.print(" 0| ");
-					else
-						System.out.print(value.getElement() + "| ");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("Time = " + t);
+		
+		for(int i = 0; i < table.getRows(); i++) {
+			for(int j = 0; j < table.getCols(); j++) {
+				try {
+					value = table.getElementAt(i, j);
+				} catch (IllegalPositionException e) {
+					e.printStackTrace();
 				}
 				
-				System.out.println();
+				if(value == null) 
+					System.out.print(" 0| ");
+				else
+					System.out.print(value.getElement() + "| ");
 			}
+			
+			System.out.println();
 		}
 	}
 

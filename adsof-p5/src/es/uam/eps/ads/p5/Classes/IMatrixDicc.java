@@ -56,7 +56,7 @@ public class IMatrixDicc<T> implements IMatrix<T> {
 
 	@Override
 	public boolean isLegalPosition(int i, int j) {
-		return !(i >= rows || j >= cols);
+		return !(i >= rows || j >= cols || i < 0 || j < 0);
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class IMatrixDicc<T> implements IMatrix<T> {
 			list.add(table.get(key));
 		}
 		
-		return null;
+		return list;
 	}
 	
 	public boolean equals(IMatrixDicc<T> matrix) {

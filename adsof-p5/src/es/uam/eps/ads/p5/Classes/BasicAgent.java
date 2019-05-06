@@ -24,7 +24,12 @@ public class BasicAgent implements IBasicAgent {
 	@Override
 	public IBasicAgent copy() {
 		BasicAgent newAgent = new BasicAgent(type);
-		newAgent.setPos(this.cell);
+		try {
+			newAgent.cell = (Cell) this.cell.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return newAgent;
 	}
